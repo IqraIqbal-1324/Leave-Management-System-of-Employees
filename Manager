@@ -1,0 +1,17 @@
+
+public class Manager {
+
+    private LeaveManagementSystem leaveManagementSystem;
+
+    public Manager(LeaveManagementSystem system) {
+        this.leaveManagementSystem = system;
+    }
+
+    public void approveLeaveRequest(String employeeId, LeaveRequest request) {
+        leaveManagementSystem.approveLeave(employeeId, request);
+    }
+
+    public void rejectLeaveRequest(String employeeId, LeaveRequest request) {
+        leaveManagementSystem.rejectLeave(employeeId, request);
+    }
+}
