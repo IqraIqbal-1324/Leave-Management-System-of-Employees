@@ -1,0 +1,65 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class LeaveManagementSystem {
+    private Map<String, Employee> employeeMap;
+
+    public LeaveManagementSystem() {
+        this.employeeMap = new HashMap<>();
+    }
+
+    public void addEmployee(Employee employee) {
+        employeeMap.put(employee.getId(), employee);
+    }
+
+    public Employee getEmployee(String id) {
+        return employeeMap.get(id);
+    }
+
+    public void requestLeave(String employeeId, LeaveRequest request) {
+        Employee employee = getEmployee(employeeId);
+        if (employee != null) {
+            if (employee.getLeaveBalance() >= request.getNumberOfDays()) {
+                employee.addLeaveRequest(request);
+                System.out.println("Leave request submitted successfully.");
+            } else {
+                System.out.println("Insufficient leave balance.");
+            }
+        } else {
+            System.out.println("Employee not found.");
+        }
+    }
+
+    public void showEmployeeLeaveRequests(String employeeId) {
+        Employee employee = getEmployee(employeeId);
+        if (employee != null) {
+            System.out.println(employee.getName() + "'s Leave Requests:");
+            for (LeaveRequest request : employee.getLeaveRequests()) {
+                System.out.println(request);
+            }
+        } else {
+            System.out.println("Employee not found.");
+        }
+    }
+
+    public void approveLeave(String employeeId, LeaveRequest request) {
+        Employee employee = getEmployee(employeeId);
+        if (employee != null && request.getStatus().equals("Pending")) {
+            employee.deductLeaveBalance(request.getNumberOfDays());
+            request.setStatus("Approved");
+            System.out.println("Leave approved for " + employee.getName());
+        } else {
+            System.out.println("Cannot approve leave.");
+        }
+    }
+
+    public void rejectLeave(String employeeId, LeaveRequest request) {
+        Employee employee = getEmployee(employeeId);
+        if (employee != null && request.getStatus().equals("Pending")) {
+            request.setStatus("Rejected");
+            System.out.println("Leave rejected for " + employee.getName());
+        } else {
+            System.out.println("Cannot reject leave.");
+        }
+    }
+}
