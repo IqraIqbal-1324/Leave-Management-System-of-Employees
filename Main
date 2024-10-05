@@ -1,0 +1,34 @@
+import java.time.LocalDate;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating leave management system
+        LeaveManagementSystem system = new LeaveManagementSystem();
+
+        // Adding employees
+        Employee emp1 = new Employee("E001", "John Doe", 30);
+        Employee emp2 = new Employee("E002", "Jane Smith", 25);
+
+        system.addEmployee(emp1);
+        system.addEmployee(emp2);
+
+        // Manager for approval/rejection
+        Manager manager = new Manager(system);
+
+        // Employee requests leave
+        LeaveRequest leaveRequest = new LeaveRequest("Vacation", LocalDate.of(2024, 10, 5), LocalDate.of(2024, 10, 10));
+        system.requestLeave("E001", leaveRequest);
+
+        // Show pending leave requests
+        system.showEmployeeLeaveRequests("E001");
+
+        // Manager approves the leave
+        manager.approveLeaveRequest("E001", leaveRequest);
+
+        // Show updated leave requests
+        system.showEmployeeLeaveRequests("E001");
+
+        // Show employee details
+        System.out.println(emp1);
+    }
+}
