@@ -1,0 +1,52 @@
+import java.time.LocalDate;
+
+public class LeaveRequest {
+    private String leaveType;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private int numberOfDays;
+    private String status;
+
+    public LeaveRequest(String leaveType, LocalDate startDate, LocalDate endDate) {
+        this.leaveType = leaveType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.numberOfDays = (int) (endDate.toEpochDay() - startDate.toEpochDay()) + 1;
+        this.status = "Pending";
+    }
+
+    public String getLeaveType() {
+        return leaveType;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public int getNumberOfDays() {
+        return numberOfDays;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "LeaveRequest{" +
+                "leaveType='" + leaveType + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", numberOfDays=" + numberOfDays +
+                ", status='" + status + '\'' +
+                '}';
+    }
+}
