@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Employee {
+    private String id;
+    private String name;
+    private int leaveBalance;
+    private List<LeaveRequest> leaveRequests;
+
+    public Employee(String id, String name, int leaveBalance) {
+        this.id = id;
+        this.name = name;
+        this.leaveBalance = leaveBalance;
+        this.leaveRequests = new ArrayList<>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLeaveBalance() {
+        return leaveBalance;
+    }
+
+    public void deductLeaveBalance(int days) {
+        this.leaveBalance -= days;
+    }
+
+    public List<LeaveRequest> getLeaveRequests() {
+        return leaveRequests;
+    }
+
+    public void addLeaveRequest(LeaveRequest request) {
+        this.leaveRequests.add(request);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", leaveBalance=" + leaveBalance +
+                '}';
+    }
+}
